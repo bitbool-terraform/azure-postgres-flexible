@@ -18,7 +18,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   public_network_access_enabled  = var.public_network_access_enabled
 
   delegated_subnet_id    = data.azurerm_subnet.subnet.id
-  private_dns_zone_id    = azurerm_private_dns_zone.main.id
+  private_dns_zone_id    = var.private_dns_zone_id
 
 
   sku_name               = var.sku_name
@@ -30,5 +30,10 @@ resource "azurerm_postgresql_flexible_server" "main" {
 
   tags                   = var.tags
 
-  depends_on = [azurerm_private_dns_zone_virtual_network_link.main]
+  # depends_on = [azurerm_private_dns_zone_virtual_network_link.main]
+  lifecycle {
+    ignore_changes = [
+      zone
+    ]
+  }  
 }
