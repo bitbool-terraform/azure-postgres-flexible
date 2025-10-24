@@ -19,4 +19,5 @@ variable "storage_tier" {default = "P4" }
 variable "postgres_version" {default = "16" }
 variable "tags" {default = null }
 variable "zone" {default = null }
+variable "postgres_config" {default = {} }
 

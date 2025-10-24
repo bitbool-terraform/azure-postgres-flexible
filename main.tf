@@ -37,3 +37,11 @@ resource "azurerm_postgresql_flexible_server" "main" {
     ]
   }  
 }
+
+resource "azurerm_postgresql_flexible_server_configuration" "server_conf" {
+  for_each = var.postgres_config
+
+  name      = each.key
+  value     = each.value
+  server_id = azurerm_postgresql_flexible_server.main.id
+}
